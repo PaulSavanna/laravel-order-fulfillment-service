@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+/.idea
+/.fleet
+/.phpunit.result.cache
+/.env
+/storage/*.key
+/storage/logs/*
+/bootstrap/cache/*.php
+!.gitkeep
+/database/*.sqlite
+/.DS_Store
+/coverage
+/build

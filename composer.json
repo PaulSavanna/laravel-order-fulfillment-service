@@ -1,0 +1,103 @@
+{
+    "name": "acme/laravel-order-fulfillment-service",
+    "type": "project",
+    "description": "Production-like internal e-commerce order fulfillment service built with Laravel 11.",
+    "keywords": [
+        "laravel",
+        "ecommerce",
+        "fulfillment",
+        "ddd",
+        "redis",
+        "marketplace"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pint": "^1.15",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php artisan migrate --force --ansi",
+            "@php artisan db:seed --force --ansi"
+        ],
+        "test": [
+            "@php artisan test"
+        ],
+        "test:unit": [
+            "@php artisan test --testsuite=Unit"
+        ],
+        "test:feature": [
+            "@php artisan test --testsuite=Feature"
+        ],
+        "lint": [
+            "@php vendor/bin/pint --test"
+        ],
+        "qa": [
+            "@php tools/php-lint.php",
+            "@php tools/repo-hygiene.php",
+            "@php tools/validate-api-contracts.php",
+            "@php tools/static-smoke.php",
+            "@php vendor/bin/pint",
+            "@php vendor/bin/pint --test"
+        ],
+        "bootstrap": [
+            "@php artisan key:generate --force --ansi",
+            "@php artisan optimize:clear --ansi",
+            "@php artisan migrate:fresh --seed --ansi",
+            "@php artisan route:list --ansi"
+        ],
+        "acceptance": [
+            "@bash tools/test-api.sh"
+        ],
+        "verify": [
+            "@php tools/php-lint.php",
+            "@php tools/repo-hygiene.php",
+            "@php tools/validate-api-contracts.php",
+            "@php tools/static-smoke.php",
+            "@php vendor/bin/pint",
+            "@php vendor/bin/pint --test",
+            "@php artisan route:list --ansi",
+            "@php artisan test --ansi"
+        ],
+        "format": [
+            "@php vendor/bin/pint"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
