@@ -3,10 +3,19 @@
 namespace App\Domain\Models;
 
 use App\Domain\Exceptions\InsufficientStock;
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory(): ProductFactory
+    {
+        return ProductFactory::new();
+    }
+
     protected $fillable = ['name', 'sku', 'stock', 'price'];
 
     protected $casts = [

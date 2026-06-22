@@ -2,10 +2,19 @@
 
 namespace App\Domain\Models;
 
+use Database\Factories\OrderItemFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory(): OrderItemFactory
+    {
+        return OrderItemFactory::new();
+    }
+
     protected $fillable = ['order_id', 'product_id', 'quantity', 'unit_price'];
 
     protected $casts = [

@@ -19,7 +19,4 @@ return [
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
     ],
-    'providers' => [
-        App\Providers\AppServiceProvider::class,
-    ],
 ];

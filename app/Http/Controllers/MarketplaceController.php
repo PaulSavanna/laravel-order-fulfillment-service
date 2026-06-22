@@ -20,7 +20,7 @@ class MarketplaceController extends Controller
             collect($request->input('orders'))
         );
 
-        return OrderResource::collection($imported);
+        return OrderResource::collection($imported)->response()->setStatusCode(201);
     }
 
     public function syncStatus(Request $request)

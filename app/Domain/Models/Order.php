@@ -4,10 +4,19 @@ namespace App\Domain\Models;
 
 use App\Domain\Enums\OrderStatus;
 use App\Domain\Exceptions\InvalidStatusTransition;
+use Database\Factories\OrderFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasFactory;
+
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
+    }
+
     protected $fillable = ['uuid', 'status', 'total', 'idempotency_key', 'metadata'];
 
     protected $casts = [
